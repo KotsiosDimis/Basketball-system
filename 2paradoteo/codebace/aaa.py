@@ -203,6 +203,32 @@ class BasketballLeague:
         else:
             print(f"Error: '{filename}' not found.")
 
+    
+
+    def reset_numerical_values(self, filename='2paradoteo\\codebace\\basketball_data.json'):
+        if os.path.exists(filename):
+            with open(filename, 'r+') as f:
+                file_data = json.load(f)
+
+                for team in file_data['teams']:
+                    team['wins'] = 0
+                    for player in team['players']:
+                        player['points'] = 0
+                        player['rebounds'] = 0
+                        player['assists'] = 0
+                        player['steals'] = 0
+                        player['blocks'] = 0
+                        player['fouls'] = 0
+
+                f.seek(0)
+                json.dump(file_data, f, indent=4)
+                f.truncate()
+
+            print("Numerical values reset successfully.")
+        else:
+            print(f"Error: '{filename}' not found.")
+
+
 
 
 # Instantiate the league outside the loop
@@ -212,9 +238,10 @@ while True:
     print("\nChoose an option:")
     print("1. Use existing data")
     print("2. Append new data")
-    print("3. Delete all existing data and start fresh")
-    print("4. Exit")
-    option = input("Enter the option number (1/2/3/4): ")
+    print("3. Reset all values to 0")
+    print("4. Delete all existing data and start fresh")
+    print("5. Exit")
+    option = input("Enter the option number (1/2/3/4/5): ")
 
     if option == "1":
         if os.path.exists('2paradoteo\\codebace\\basketball_data.json'):  
@@ -233,12 +260,14 @@ while True:
         league.teams.extend(existing_teams)
         break
     elif option == "3":
+        league.reset_numerical_values()
+    elif option == "4":
         league.delete_data()
         exit()
-    elif option == "4":
+    elif option == "5":
         exit()
     else:
-        print("Invalid option. Please enter 1, 2, 3, or 4.")
+        print("Invalid option. Please enter 1, 2, 3, 4 or 5")
 
 # Start the championship
 league.create_championship()
