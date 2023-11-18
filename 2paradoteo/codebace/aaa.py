@@ -19,6 +19,8 @@ class Player:
         self.position = position
         self.team = team
         self.points = 0
+        # TODO: Implement counters for rebounds, assists, steals, blocks, and fouls
+        #       Ensure these counters are updated throughout the game.
         self.rebounds = 0
         self.assists = 0
         self.steals = 0
@@ -32,12 +34,14 @@ class BasketballLeague:
         self.teams = teams
 
     def create_teams(self, num_teams):
+        # TODO: Change the creation of teams to custom names, cities, and logos
         # Create teams with default names, cities, and logos
         for i in range(num_teams):
             team = Team(f"NTeam{i+1}", f"NCity{i+1}", f"NLogo{i+1}")
             self.teams.append(team)
 
     def create_players_for_team(self, team, num_players):
+        # TODO: Change the creation of players to custom names, positions, and teams
         # Create players for a given team
         for i in range(num_players):
             player = Player(f"Player{i+1}", f"Position{i+1}", team)
@@ -50,7 +54,8 @@ class BasketballLeague:
 
         print(f"\n1. {home_team.name}\n")
         print(f"2. {away_team.name}\n")
-
+        # TODO: Change the scoring to user's choice or bigger value
+        # Simulate a match between two teams
         while home_team_score < 2 and away_team_score < 2:
             scoring_team = input("Enter the number of the team that scored  (1 or 2): ")
 
@@ -118,17 +123,12 @@ class BasketballLeague:
 
         for round in range(num_rounds):
             round_schedule = []
-
             for match in range(matches_per_round):
                 home_team = teams[match]
                 away_team = teams[num_rounds - match]
-
                 round_schedule.append((home_team, away_team))
-
             schedule.append(round_schedule)
-
             teams.insert(1, teams.pop())
-
         return schedule
 
     def play_matches(self, schedule):
