@@ -1,9 +1,125 @@
 {
     "teams": [
         {
+            "name": "Team2",
+            "city": "City2",
+            "logo": "Logo2",
+            "players": [
+                {
+                    "name": "Player6",
+                    "position": "Position1",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player7",
+                    "position": "Position2",
+                    "points": 4,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player8",
+                    "position": "Position3",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player9",
+                    "position": "Position4",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player10",
+                    "position": "Position5",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                }
+            ],
+            "wins": 4
+        },
+        {
             "name": "Team1",
             "city": "City1",
             "logo": "Logo1",
+            "players": [
+                {
+                    "name": "Player1",
+                    "position": "Position1",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player2",
+                    "position": "Position2",
+                    "points": 4,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player3",
+                    "position": "Position3",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player4",
+                    "position": "Position4",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                },
+                {
+                    "name": "Player5",
+                    "position": "Position5",
+                    "points": 0,
+                    "rebounds": 0,
+                    "assists": 0,
+                    "steals": 0,
+                    "blocks": 0,
+                    "fouls": 0
+                }
+            ],
+            "wins": 4
+        },
+        {
+            "name": "NTeam2",
+            "city": "NCity2",
+            "logo": "NLogo2",
             "players": [
                 {
                     "name": "Player1",
@@ -56,15 +172,15 @@
                     "fouls": 0
                 }
             ],
-            "wins": 0
+            "wins": 2
         },
         {
-            "name": "Team2",
-            "city": "City2",
-            "logo": "Logo2",
+            "name": "NTeam1",
+            "city": "NCity1",
+            "logo": "NLogo1",
             "players": [
                 {
-                    "name": "Player6",
+                    "name": "Player1",
                     "position": "Position1",
                     "points": 0,
                     "rebounds": 0,
@@ -74,9 +190,9 @@
                     "fouls": 0
                 },
                 {
-                    "name": "Player7",
+                    "name": "Player2",
                     "position": "Position2",
-                    "points": 0,
+                    "points": 4,
                     "rebounds": 0,
                     "assists": 0,
                     "steals": 0,
@@ -84,7 +200,7 @@
                     "fouls": 0
                 },
                 {
-                    "name": "Player8",
+                    "name": "Player3",
                     "position": "Position3",
                     "points": 0,
                     "rebounds": 0,
@@ -94,7 +210,7 @@
                     "fouls": 0
                 },
                 {
-                    "name": "Player9",
+                    "name": "Player4",
                     "position": "Position4",
                     "points": 0,
                     "rebounds": 0,
@@ -104,7 +220,7 @@
                     "fouls": 0
                 },
                 {
-                    "name": "Player10",
+                    "name": "Player5",
                     "position": "Position5",
                     "points": 0,
                     "rebounds": 0,
@@ -114,7 +230,7 @@
                     "fouls": 0
                 }
             ],
-            "wins": 0
+            "wins": 2
         }
     ]
 }

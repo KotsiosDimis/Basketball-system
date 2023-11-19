@@ -72,13 +72,13 @@ class BasketballLeague:
     
             if scoring_team == '1':
                 home_player = self.choose_player(home_team)
-                home_points = self.get_points("Enter the number of points for " + home_player.name + "'s shot: ")
+                home_points = self.get_points(home_player,"Enter the number of points for " + home_player.name + "'s shot: ")
                 home_team_score += home_points
                 print(f"\t{home_player.name} scores {home_points} points. Total score: {home_team_score} - {away_team_score}")
             
             elif scoring_team == '2':
                 away_player = self.choose_player(away_team)
-                away_points = self.get_points("Enter the number of points for " + away_player.name + "'s shot: ")
+                away_points = self.get_points(away_player,"Enter the number of points for " + away_player.name + "'s shot: ")
                 away_team_score += away_points
                 print(f"\t{away_player.name} scores {away_points} points. Total score: {home_team_score} - {away_team_score}")
             else:
@@ -89,11 +89,12 @@ class BasketballLeague:
             
            
 
-    def get_points(self, message):
+    def get_points(self,player, message):
         while True:
             try:
                 points = int(input(message))
                 if 1 <= points <= 3:
+                    player.points += points
                     return points
                 else:
                     print("Invalid number of points. Please enter a number between 1 and 3.")
@@ -193,13 +194,6 @@ class BasketballLeague:
 
         # Return the list of team objects
         return team_objects
-    
-    def delete_data(self, filename='2paradoteo\\codebace\\basketball_data.json'):
-        if os.path.exists(filename):
-            with open(filename, 'w'): pass
-            print("Data cleared successfully.")
-        else:
-            print(f"Error: '{filename}' not found.")
 
 
 while True:
@@ -220,7 +214,8 @@ while True:
         print("Error: 'basketball_data.json' not found. Please choose option 2 or 3.")
     elif option == "2":
         num_teams = int(input("Enter the number of teams that you want to add: "))
-        
+        existing_teams=league.handle_json()
+        league.teams.extend(existing_teams)
         
         league.create_teams(num_teams)
 
@@ -228,16 +223,13 @@ while True:
         num_players_per_team = int(input("\n  Enter the number of players per team: "))
         for team in league.teams:
             league.create_players_for_team(team, num_players_per_team)
-
-        existing_teams=league.handle_json()
-        league.teams.extend(existing_teams)
-
+        
         # Append teams to JSON file
         league.append_to_json_file('2paradoteo\\codebace\\basketball_data.json')
         break
     elif option == "3":
-        league.delete_data()
-        exit()
+        league.teams = []
+        break
     else:
         print("Invalid option. Please enter 1, 2, or 3.")
 
@@ -245,21 +237,3 @@ while True:
 
 # Start the championship
 league.create_championship()
-
-
-# # Create an instance of the BasketballLeague class
-# league = BasketballLeague([])
-
-# # User creates teams
-# num_teams = int(input("Enter the number of teams for the league: "))
-# for i in range(num_teams):
-#     print("\n Create Team " + str(i + 1) + "\n")
-#     league.create_team()
-
-# # User creates players for each team
-# num_players_per_team = int(input("\n  Enter the number of players per team: "))
-# for team in league.teams:
-#     for i in range(num_players_per_team):
-#         print(f"\n Create " + str(i + 1) + " Player for Team " + team.name +"\n")
-#         player = league.create_player(team.name)
-#         league.add_player_to_team(player)
