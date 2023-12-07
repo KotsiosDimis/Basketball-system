@@ -122,7 +122,29 @@ class BasketballLeague:
         for i, team in enumerate(self.teams, 1):
             print(f"{i} place: {team.name} - Wins: {team.wins}")
 
-    
+    def append_new_teams(self):
+        current_team_count = len(self.teams)
+        print("To maintain a balanced championship, the total number of teams must be even.")
+        if current_team_count % 2 == 0:
+            print(f"Currently, there are {current_team_count} teams, which is even. You need to add an even number of new teams to keep the total even.")
+        else:
+            print(f"Currently, there are {current_team_count} teams, which is odd. You need to add an odd number of new teams to make the total even.")
+        
+        num_teams_to_add = int(input("Enter the number of new teams you want to add: "))
+        while (current_team_count + num_teams_to_add) % 2 != 0:
+            if num_teams_to_add % 2 == 0:
+                print("You've entered an even number of new teams which would result in an odd total. Please enter an odd number of new teams.")
+            else:
+                print("You've entered an odd number of new teams which would still result in an odd total. Please enter an even number of new teams.")
+            num_teams_to_add = int(input("Enter a different number of teams to add: "))
+        last_existing_team_index = len(self.teams)
+        self.create_teams(num_teams_to_add)
+        
+        num_players_per_team = int(input("\nEnter the number of players per team (between 5 and 10): "))
+        
+        for i in range(last_existing_team_index, len(self.teams)):
+            self.create_players_for_team(self.teams[i], num_players_per_team)
+
     def exchange_players(self,teams):
     # Display teams and prompt user to choose two teams
         print("Choose two teams to exchange players between:")
