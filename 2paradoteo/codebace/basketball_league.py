@@ -121,3 +121,106 @@ class BasketballLeague:
         self.teams.sort(key=lambda x: x.wins, reverse=True)
         for i, team in enumerate(self.teams, 1):
             print(f"{i} place: {team.name} - Wins: {team.wins}")
+
+    
+    def exchange_players(self,teams):
+    # Display teams and prompt user to choose two teams
+        print("Choose two teams to exchange players between:")
+        for i, team in enumerate(teams, 1):
+            print(f"{i}. {team.name}")  # Using dot notation to access the name attribute
+
+        first_team_index = int(input("Enter the number for the first team: ")) - 1
+        second_team_index = int(input("Enter the number for the second team: ")) - 1
+
+        # Ensure the chosen teams are different
+        if first_team_index == second_team_index:
+            print("Please select two different teams.")
+            return
+
+        # Select player from the first team
+        first_team = teams[first_team_index]
+        print(f"\nChoose a player from {first_team.name}:")
+        for i, player in enumerate(first_team.players, 1):  # Assuming players is a list attribute
+            print(f"{i}. {player.name}")  # Adjust based on how a player is represented
+        first_player_index = int(input("Enter the player number: ")) - 1
+
+        # Select player from the second team
+        second_team = teams[second_team_index]
+        print(f"\nChoose a player from {second_team.name}:")
+        for i, player in enumerate(second_team.players, 1):
+            print(f"{i}. {player.name}")
+        second_player_index = int(input("Enter the player number: ")) - 1
+
+        # Exchange the players
+        first_team.players[first_player_index], second_team.players[second_player_index] = \
+            second_team.players[second_player_index], first_team.players[first_player_index]
+
+        print(f"Exchanged players between {first_team.name} and {second_team.name}.")
+
+        return teams
+    
+    def add_new_players(self):
+        # Add a new player to a team
+        team = self.choose_team()
+        if len(team.players) >= 10:
+            print(f"{team.name} already has the maximum number of players.")
+            return
+        print(f"There are currently {len(team.players)} players in the team and the maximum is 10.") 
+        numofplayers = int(input("Enter the number of players to add: "))
+        if len(team.players) + numofplayers > 10:
+            print(f"{team.name} reached {len(team.players) + numofplayers} players, which is more than the maximum of 10.")
+            return
+        else:
+            for i in range(numofplayers):
+                player_name = input(f"Enter the name of player {i+1}: ")
+                player_position = input(f"Enter the position of player {i+1}: ")
+                player = Player(player_name, player_position, team)
+                team.players.append(player)
+        print(f"{numofplayers} players have been added to {team.name}.")
+        
+       
+        
+
+    def remove_players(self):
+        # Remove players from a team
+        team = self.choose_team()
+        if len(team.players) == 0:
+            print(f"{team.name} does not have any players.")
+            return
+        
+        # Display all players in the team
+        for i, player in enumerate(team.players, 1):
+            print(f"{i}. {player.name}")
+        
+        # Get the number of players to remove and validate it
+        num_of_players_to_remove = int(input("Enter the number of players to remove: "))
+        if num_of_players_to_remove > len(team.players) or num_of_players_to_remove < 1:
+            print("Invalid number of players to remove.")
+            return
+        
+        # Remove the selected players from the team
+        for _ in range(num_of_players_to_remove):
+            player_to_remove = self.choose_player(team)
+            team.players.remove(player_to_remove)
+            print(f"{player_to_remove.name} has been removed from {team.name}.")
+            
+
+    def choose_player(self, team):
+        # Choose a player from a given team
+        print(f"\nChoose a player from {team.name}:")
+        for i, player in enumerate(team.players, 1):
+            print(f"{i}. {player.name}")
+        player_index = int(input("Enter the player number: ")) - 1
+        return team.players[player_index]
+    
+    def choose_team(self):
+        # Choose a team
+        print("\nChoose a team:")
+        for i, team in enumerate(self.teams, 1):
+            print(f"{i}. {team.name}")
+        team_index = int(input("Enter the team number: ")) - 1
+        return self.teams[team_index]
+
+
+        
+

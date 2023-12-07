@@ -1,12 +1,17 @@
+from re import L
+from turtle import goto
 from basketball_league import BasketballLeague
 from json_operations import JSONOperations
 import os
 
 # Instantiate the league outside the loop
-league = BasketballLeague([])
-file = JSONOperations('2paradoteo\\codebace\\basketball_data.json')
 
-while True:
+file = JSONOperations('2paradoteo\\codebace\\basketball_data.json')
+existing_teams = file.handle_json()
+league = BasketballLeague(existing_teams)
+
+flag1=True
+while flag1:
     print("\nChoose an option:")
     print("1. Use existing data")
     print("2. Append new data")
@@ -19,15 +24,10 @@ while True:
     
     # TODO: Add option to make changes for players and teams
     if option == "1":
-        if os.path.exists('basketball_data.json'):
-            existing_teams = file.handle_json()
-            league.teams.extend(existing_teams)
             league.create_championship()
+            # file.append_to_json_file(league)
             break
-        else:
-            print("Error: 'basketball_data.json' not found. Please choose option 2 or 3.")
     elif option == "2":
-        existing_teams = file.handle_json()  # Read existing teams from JSON
         current_team_count = len(existing_teams)
         print("To maintain a balanced championship, the total number of teams must be even.")
         if current_team_count % 2 == 0:
@@ -59,6 +59,34 @@ while True:
         file.delete_data()
         exit()
     elif option == "5":
+        flag2=True
+        while flag2:
+            print("\nChoose an option:")
+            print("1. Exchange players")
+            print("2. Add new player")
+            print("3. Remove player")
+            print("4. Back to main menu")
+            option = input("Enter the option number (1/2/3/4): ")
+            if option == "1":
+                existing_teams = league.exchange_players(existing_teams)
+                
+                flag1 = False
+                flag2 = False              
+            elif option == "2":
+                league.add_new_players()
+                flag1 = False
+                flag2 = False
+            elif option == "3":
+                league.remove_players()
+                flag1 = False
+                flag2 = False
+            elif option == "4":
+                flag2 = False
+                
+        
+    elif option == "6":
+        league.show_stats()
+    elif option == "7":
         exit()
     else:
         print("Invalid option. Please enter 1, 2, 3, 4 or 5")
