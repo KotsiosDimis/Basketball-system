@@ -1,8 +1,9 @@
 from basketball_league import BasketballLeague
 from json_operations import JSONOperations
-import os
+
 
 # Instantiate the league outside the loop
+
 
 file = JSONOperations('2paradoteo\\codebace\\basketball_data.json')
 existing_teams = file.handle_json()
@@ -42,7 +43,7 @@ while flag1:
             print("4. Back to main menu")
             option = input("Enter the option number (1/2/3/4): ")
             if option == "1":
-                existing_teams = league.exchange_players(existing_teams)                
+                league.exchange_players() 
                 flag1 = False
                 flag2 = False              
             elif option == "2":
@@ -58,14 +59,36 @@ while flag1:
                 
         
     elif option == "6":
-        league.show_stats()
+        flag2 = True
+        while flag2:
+            print("\nChoose an option:")
+            print("1. Show team averages")
+            print("2. Show total team statistics")
+            print("3. Show MVP")
+            print("4. Show a Player's statistics")
+            print("5. Back to main menu")
+            option = input("Enter the option number (1/2/3/4/5): ")
+            if option == "1":
+                league.calculate_averages()
+                flag2 = False
+                flag1 = False
+            elif option == "2":
+                league.show_total_team_statistics()
+                flag2 = False
+            elif option == "3":
+                league.show_MVP()
+            elif option == "4":
+                league.show_player_statistics()
+            elif option == "5":
+                flag2 = False
     elif option == "7":
         exit()
     else:
-        print("Invalid option. Please enter 1, 2, 3, 4 or 5")
+        print("Invalid option. Please enter 1, 2, 3, 4, 5, 6, or 7")
 
-# Start the championship
+
 
 
 # Append to the JSON file
 file.append_to_json_file(league)
+

@@ -13,3 +13,16 @@ class Player:
         self.steals = 0
         self.blocks = 0
         self.fouls = 0
+
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "position": self.position,
+            "points": self.points,
+            "rebounds": self.rebounds,
+            "assists": self.assists,
+            "steals": self.steals,
+            "blocks": self.blocks,
+            "fouls": self.fouls
+        }

@@ -28,15 +28,23 @@ class JSONOperations:
 
     def append_to_json_file(self, league):
         # Append league information to an existing JSON file
-        with open(self.filename, 'r+') as f:
-            file_data = json.load(f)
-            file_data.update({"teams": self.teams_to_dict(league)["teams"]})
-            f.seek(0)
-            json.dump(file_data, f, indent=4)
-            f.truncate()
+        if os.path.exists(self.filename) and os.stat(self.filename).st_size != 0:
+            with open(self.filename, 'r+') as f:
+                file_data = json.load(f)
+                file_data["teams"].extend(self.teams_to_dict(league)["teams"])
+                f.seek(0)
+                json.dump(file_data, f, indent=4)
+                f.truncate()
+        else:
+            with open(self.filename, 'w') as f:
+                json.dump(self.teams_to_dict(league), f, indent=4)
+        
 
     def handle_json(self):
-        # Read and handle information from an existing JSON file
+        if not os.path.exists(self.filename):
+            return []
+        if os.stat(self.filename).st_size == 0:
+            return []
         with open(self.filename, "r") as file:
             data = json.load(file)
 
@@ -48,7 +56,20 @@ class JSONOperations:
             team_obj.wins = team["wins"]
 
             for player in team["players"]:
-                player_obj = Player(player["name"], player["position"], team_obj)
+                # Create a Player object with existing values from JSON
+                player_obj = Player(
+                    name=player["name"],
+                    position=player["position"],
+                    team=team_obj
+                )
+                # Assign existing values, use .get() to provide defaults if not found
+                player_obj.points = player.get("points", 0)
+                player_obj.assists = player.get("assists", 0)
+                player_obj.rebounds = player.get("rebounds", 0)
+                player_obj.steals = player.get("steals", 0)
+                player_obj.blocks = player.get("blocks", 0)
+                player_obj.fouls = player.get("fouls", 0)
+
                 team_obj.players.append(player_obj)
 
             team_objects.append(team_obj)

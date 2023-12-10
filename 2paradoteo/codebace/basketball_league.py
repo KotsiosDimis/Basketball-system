@@ -6,18 +6,35 @@ class BasketballLeague:
         # BasketballLeague constructor initializes teams attribute
         self.teams = teams
 
+    def teams_to_dict(self, league):
+        teams_dict = {"teams": []}
+        for team in league.teams:
+            team_dict = {
+                "name": team.name,
+                "city": team.city,
+                "logo": team.logo,
+                "players": [player.to_dict() for player in team.players],
+                "wins": team.wins
+            }
+            teams_dict["teams"].append(team_dict)
+        return teams_dict
+
+
     def create_teams(self, num_teams):
-        # TODO: Change the creation of teams to custom names, cities, and logos
-        # Create teams with default names, cities, and logos
+    # Create teams with custom names, cities, and logos
         for i in range(num_teams):
-            team = Team(f"NTeam{i+1}", f"NCity{i+1}", f"NLogo{i+1}")
+            team_name = input(f"Enter the name for Team {i+1}: ")
+            city = input(f"Enter the city for Team {i+1}: ")
+            logo = input(f"Enter the logo for Team {i+1}: ")
+            team = Team(team_name, city, logo)
             self.teams.append(team)
 
     def create_players_for_team(self, team, num_players):
-        # TODO: Change the creation of players to custom names, positions, and teams
-        # Create players for a given team
+        # Create players for a given team with custom names and positions
         for i in range(num_players):
-            player = Player(f"Player{i+1}", f"Position{i+1}", team)
+            player_name = input(f"Enter the name for Player {i+1} in {team.name}: ")
+            position = input(f"Enter the position for Player {i+1} in {team.name}: ")
+            player = Player(player_name, position, team)
             team.players.append(player)
 
     def simulate_match(self, home_team, away_team):
@@ -62,26 +79,16 @@ class BasketballLeague:
             except ValueError:
                 print("Invalid input. Please enter a number.")
 
-    def choose_player(self, team):
-        # Choose a player from a given team
-        print(f"\nChoose a player from {team.name}:")
-        for i, player in enumerate(team.players, 1):
-            print(f"{i}. {player.name}")
-
-        while True:
-            try:
-                choice = int(input("Enter the player number: "))
-                if 1 <= choice <= len(team.players):
-                    return team.players[choice - 1]
-                else:
-                    print("Invalid choice. Please enter a valid player number.")
-            except ValueError:
-                print("Invalid input. Please enter a number.")
 
     def create_championship(self):
-        # Create a championship schedule and play matches
+    # Create a championship schedule and play matches
         if len(self.teams) % 2 != 0:
             raise ValueError("Number of teams must be even")
+        
+        # Ensure each team has more than 5 players
+        for team in self.teams:
+            if len(team.players) < 5:
+                raise ValueError(f"Team {team.name} does not have enough players (minimum 5 required).")
 
         schedule = self.schedule_matches(self.teams)
         self.play_matches(schedule)
@@ -145,10 +152,10 @@ class BasketballLeague:
         for i in range(last_existing_team_index, len(self.teams)):
             self.create_players_for_team(self.teams[i], num_players_per_team)
 
-    def exchange_players(self,teams):
+    def exchange_players(self):
     # Display teams and prompt user to choose two teams
         print("Choose two teams to exchange players between:")
-        for i, team in enumerate(teams, 1):
+        for i, team in enumerate(self.teams, 1):
             print(f"{i}. {team.name}")  # Using dot notation to access the name attribute
 
         first_team_index = int(input("Enter the number for the first team: ")) - 1
@@ -160,14 +167,14 @@ class BasketballLeague:
             return
 
         # Select player from the first team
-        first_team = teams[first_team_index]
+        first_team = self.teams[first_team_index]
         print(f"\nChoose a player from {first_team.name}:")
         for i, player in enumerate(first_team.players, 1):  # Assuming players is a list attribute
             print(f"{i}. {player.name}")  # Adjust based on how a player is represented
         first_player_index = int(input("Enter the player number: ")) - 1
 
         # Select player from the second team
-        second_team = teams[second_team_index]
+        second_team = self.teams[second_team_index]
         print(f"\nChoose a player from {second_team.name}:")
         for i, player in enumerate(second_team.players, 1):
             print(f"{i}. {player.name}")
@@ -178,8 +185,7 @@ class BasketballLeague:
             second_team.players[second_player_index], first_team.players[first_player_index]
 
         print(f"Exchanged players between {first_team.name} and {second_team.name}.")
-
-        return teams
+        
     
     def add_new_players(self):
         # Add a new player to a team
@@ -228,21 +234,93 @@ class BasketballLeague:
             
 
     def choose_player(self, team):
-        # Choose a player from a given team
+    # Choose a player from a given team
         print(f"\nChoose a player from {team.name}:")
         for i, player in enumerate(team.players, 1):
             print(f"{i}. {player.name}")
-        player_index = int(input("Enter the player number: ")) - 1
-        return team.players[player_index]
-    
+        
+        while True:  # Keep asking until a valid input is provided
+            try:
+                player_index = int(input("Enter the player number: ")) - 1
+                # Check if the index is within the range of players
+                if 0 <= player_index < len(team.players):
+                    return team.players[player_index]
+                else:
+                    # The number is not within the range of player numbers
+                    print(f"Please enter a number between 1 and {len(team.players)}.")
+            except ValueError:
+                # The input was not an integer
+                print("Please enter a valid number.")
+
     def choose_team(self):
         # Choose a team
         print("\nChoose a team:")
         for i, team in enumerate(self.teams, 1):
             print(f"{i}. {team.name}")
-        team_index = int(input("Enter the team number: ")) - 1
-        return self.teams[team_index]
-
-
+            
+        while True:
+            try:
+                team_index = int(input("Enter the team number: ")) - 1
+                if 0 <= team_index < len(self.teams):
+                    return self.teams[team_index]
+                else:
+                    print(f"Invalid choice. Please enter a number between 1 and {len(self.teams)}.")
+            except ValueError:
+                print("Invalid input. Please enter a number.")
         
+
+    def show_total_team_statistics(self):
+        team = self.choose_team()
+        counters = self.counters(team)
+
+        print(f"\nTotal team statistics for {team.name}:")
+        print(f"Points: {counters['total_points']}")
+        print(f"Assists: {counters['total_assists']}")
+        print(f"Rebounds: {counters['total_rebounds']}")
+        print(f"Steals: {counters['total_steals']}")
+        print(f"Blocks: {counters['total_blocks']}")
+        print(f"Fouls: {counters['total_fouls']}")
+
+    def calculate_averages(self):
+        team = self.choose_team()
+        counters = self.counters(team)
+        total_players = len(team.players)
+
+        print(f"\nAverages for {team.name} Team:")
+        for stat in ["points", "rebounds", "assists", "steals", "blocks", "fouls"]:
+            average = counters[f'total_{stat}'] / total_players if total_players > 0 else 0
+            print(f"{stat.capitalize()}: {average:.2f}")  # Format for 2 decimal places
+
+    def counters(self, team):
+        total_points = sum(player.points for player in team.players)
+        total_assists = sum(player.assists for player in team.players)
+        total_rebounds = sum(player.rebounds for player in team.players)
+        total_steals = sum(player.steals for player in team.players)
+        total_blocks = sum(player.blocks for player in team.players)
+        total_fouls = sum(player.fouls for player in team.players)
+
+        return {
+            'total_points': total_points,
+            'total_assists': total_assists,
+            'total_rebounds': total_rebounds,
+            'total_steals': total_steals,
+            'total_blocks': total_blocks,
+            'total_fouls': total_fouls
+        }
+
+    def show_MVP(self):
+        all_players = [player for team in self.teams for player in team.players]
+        mvp = max(all_players, key=lambda player: player.points)
+        print(f"\n{mvp.name} is the MVP of the Tournament with {mvp.points} points.")
+
+
+    def show_player_statistics(self):
+        team = self.choose_team()
+        player = self.choose_player(team)
+    
+        player_stats = player.to_dict()  # Using to_dict method from Player class
+        print(f"\nStatistics for {player.name} in {team.name} Team:")
+        for stat, value in player_stats.items():
+            if stat != 'name' and stat != 'position':  # Assuming you don't want to print name and position here
+                print(f"{stat.capitalize()}: {value}")
 
