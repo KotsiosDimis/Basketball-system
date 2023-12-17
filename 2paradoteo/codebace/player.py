@@ -6,16 +6,13 @@ class Player:
         self.position = position
         self.team = team
         self.points = 0
-        # TODO: Implement counters for rebounds, assists, steals, blocks, and fouls
-        # Ensure these counters are updated throughout the game.
         self.rebounds = 0
         self.assists = 0
         self.steals = 0
         self.blocks = 0
         self.fouls = 0
 
-
-    def to_dict(self):
+    def player_to_dict(self):
         return {
             "name": self.name,
             "position": self.position,

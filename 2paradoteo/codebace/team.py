@@ -8,13 +8,12 @@ class Team:
         self.players = []  # List to store Player objects for the team
         self.wins = 0
 
-
-    def to_dict(self):
+    def team_to_dict(self):
         # Convert team information to a dictionary for JSON serialization
         return {
             "name": self.name,
             "city": self.city,
             "logo": self.logo,
-            "players": [player.to_dict() for player in self.players],
+            "players": [player.player_to_dict() for player in self.players],
             "wins": self.wins
         }

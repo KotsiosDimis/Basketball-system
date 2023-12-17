@@ -4,6 +4,7 @@ import os
 from player import Player
 from team import Team
 
+
 class JSONOperations:
     def __init__(self, filename):
         # JSONOperations constructor initializes the filename attribute
@@ -18,27 +19,11 @@ class JSONOperations:
                 "city": team.city,
                 "logo": team.logo,
                 "players": [
-                    {"name": player.name, "position": player.position, "points": player.points,
-                     "rebounds": player.rebounds, "assists": player.assists, "steals": player.steals,
-                     "blocks": player.blocks, "fouls": player.fouls} for player in team.players],
+                    {player.player_to_dict()} for player in team.players],
                 "wins": team.wins
             }
             teams_dict["teams"].append(team_dict)
         return teams_dict
-
-    def append_to_json_file(self, league):
-        # Append league information to an existing JSON file
-        if os.path.exists(self.filename) and os.stat(self.filename).st_size != 0:
-            with open(self.filename, 'r+') as f:
-                file_data = json.load(f)
-                file_data["teams"].extend(self.teams_to_dict(league)["teams"])
-                f.seek(0)
-                json.dump(file_data, f, indent=4)
-                f.truncate()
-        else:
-            with open(self.filename, 'w') as f:
-                json.dump(self.teams_to_dict(league), f, indent=4)
-        
 
     def handle_json(self):
         if not os.path.exists(self.filename):
