@@ -18,7 +18,7 @@
                 {
                     "name": "Player2",
                     "position": "Position2",
-                    "points": 2,
+                    "points": 4,
                     "rebounds": 1,
                     "assists": 3,
                     "steals": 0,
@@ -56,7 +56,7 @@
                     "fouls": 2
                 }
             ],
-            "wins": 2
+            "wins": 3
         },
         {
             "name": "NTeam2",
