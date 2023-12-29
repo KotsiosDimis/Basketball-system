@@ -1,6 +1,5 @@
 import json
 import os
-
 from player import Player
 from team import Team
 
@@ -114,10 +113,10 @@ class JSONOperations:
                 f.truncate()
 
             # Print success message
-            print("Numerical values reset successfully.")
+            print("\nNumerical values reset successfully.")
         else:
             # Print error message if the file is not found
-            print(f"Error: '{self.filename}' not found.")
+            print(f"\nError: '{self.filename}' not found.")
 
     def delete_data(self):
         # Check if the JSON file exists
@@ -128,7 +127,7 @@ class JSONOperations:
                 file.write('')
 
             # Print a success message
-            print("Data cleared successfully.")
+            print("\nData cleared successfully.")
         else:
             # Print an error message if the file is not found
-            print(f"Error: '{self.filename}' not found.")
+            print(f"\nError: '{self.filename}' not found.")

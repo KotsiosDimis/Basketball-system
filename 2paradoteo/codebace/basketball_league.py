@@ -55,7 +55,7 @@ class BasketballLeague:
             # Add the created player to the list of players in the team
             team.players.append(player)
 
-    def simulate_match(self, home_team, away_team):
+    def simulate_match(self, home_team, away_team, points_to_win):
         # Initialize scores and ineligible players
         home_team_score = 0
         away_team_score = 0
@@ -66,14 +66,14 @@ class BasketballLeague:
         print(f"2. {away_team.name}\n")
 
         # Simulate a match between two teams until one team reaches a score of 2
-        while home_team_score < 2 and away_team_score < 2:
+        while home_team_score < points_to_win and away_team_score < points_to_win:
 
             # Loop for team selection
             while True:
                 try:
                     # Prompt user to enter the number of the team that scored
                     scoring_team = input(
-                        "Enter the number of the team that scored (1 or 2): ")
+                        "\nEnter the number of the team that scored (1 or 2): ")
 
                     # Check if the input is valid
                     if scoring_team not in ('1', '2'):
@@ -101,7 +101,7 @@ class BasketballLeague:
                     # Check if the input is valid
                     if action not in ('1', '2', '3', '4', '5', '6'):
                         raise ValueError(
-                            "Invalid action. Please select a number from 1 to 6.")
+                            "\nInvalid action. Please select a number from 1 to 6.")
 
                     break  # Exit the loop if the input is valid
                 except ValueError as e:
@@ -114,49 +114,49 @@ class BasketballLeague:
                 if action == '1':
                     # If the action is to add a goal
                     home_points = self.get_points(
-                        f"Enter the number of points for {home_player.name}'s shot: ")
+                        f"\nEnter the number of points for {home_player.name}'s shot: ")
 
                     # Update scores and Player's Goals for Team 1
                     home_team_score += home_points
                     home_player.points += home_points
-                    print(f"\t{home_player.name} scores {home_points} points. Total score: {
+                    print(f"\n\t{home_player.name} scores {home_points} points. Total score: {
                           home_team_score} - {away_team_score}")
 
                 elif action == '2':
                     # If the action is to add an assist
                     home_player.assists += 1
-                    print(f"\nAssist added! {home_player.name} has now {
+                    print(f"\n\tAssist added! {home_player.name} has now {
                           home_player.assists} assists.")
 
                 elif action == '3':
                     # If the action is to add a rebound
                     home_player.rebounds += 1
-                    print(f"\nRebound added! {home_player.name} has now {
+                    print(f"\n\tRebound added! {home_player.name} has now {
                           home_player.rebounds} rebounds.")
 
                 elif action == '4':
                     # If the action is to add a steal
                     home_player.steals += 1
-                    print(f"\nSteal added! {home_player.name} has now {
+                    print(f"\n\tSteal added! {home_player.name} has now {
                           home_player.steals} steals.")
 
                 elif action == '5':
                     # If the action is to add a block
                     home_player.blocks += 1
-                    print(f"\nBlock added! {home_player.name} has now {
+                    print(f"\n\tBlock added! {home_player.name} has now {
                           home_player.blocks} blocks.")
 
                 elif action == '6':
                     # If the action is to add a foul
                     home_player.fouls += 1
-                    print(f"\nFoul added! {home_player.name} has now {
+                    print(f"\n\tFoul added! {home_player.name} has now {
                           home_player.fouls} fouls.")
 
                     # Check if the player has exceeded the foul limit
                     if home_player.fouls > 1:
                         ineligible_players.add(home_player)
                         print(
-                            f"{home_player.name} has exceeded the foul limit and is now ineligible to continue playing.")
+                            f"\n{home_player.name} has exceeded the foul limit and is now ineligible to continue playing.")
 
             elif scoring_team == '2':
                 # If the scoring team is Team 2
@@ -165,53 +165,53 @@ class BasketballLeague:
                 if action == '1':
                     # If the action is to add a goal
                     away_points = self.get_points(
-                        f"Enter the number of points for {away_player.name}'s shot: ")
+                        f"\nEnter the number of points for {away_player.name}'s shot: ")
 
                     # Update scores and Player's Goals for Team 2
                     away_team_score += away_points
                     away_player.points += away_points
-                    print(f"\t{away_player.name} scores {away_points} points. Total score: {
+                    print(f"\n\t{away_player.name} scores {away_points} points. Total score: {
                           home_team_score} - {away_team_score}")
 
                 elif action == '2':
                     # If the action is to add an assist
                     away_player.assists += 1
-                    print(f"Assist added! {away_player.name} has now {
+                    print(f"\n\tAssist added! {away_player.name} has now {
                           away_player.assists} assists.")
 
                 elif action == '3':
                     # If the action is to add a rebound
                     away_player.rebounds += 1
-                    print(f"Rebound added! {away_player.name} has now {
+                    print(f"\n\tRebound added! {away_player.name} has now {
                           away_player.rebounds} rebounds.")
 
                 elif action == '4':
                     # If the action is to add a steal
                     away_player.steals += 1
-                    print(f"Steal added! {away_player.name} has now {
+                    print(f"\n\tSteal added! {away_player.name} has now {
                           away_player.steals} steals.")
 
                 elif action == '5':
                     # If the action is to add a block
                     away_player.blocks += 1
-                    print(f"Block added! {away_player.name} has now {
+                    print(f"\n\tBlock added! {away_player.name} has now {
                           away_player.blocks} blocks.")
 
                 elif action == '6':
                     # If the action is to add a foul
                     away_player.fouls += 1
-                    print(f"Foul added! {away_player.name} has now {
+                    print(f"\n\tFoul added! {away_player.name} has now {
                           away_player.fouls} fouls.")
 
                     # Check if the player has exceeded the foul limit
                     if away_player.fouls > 1:
                         ineligible_players.add(away_player)
                         print(
-                            f"{away_player.name} has exceeded the foul limit and is now ineligible to continue playing.")
+                            f"\n{away_player.name} has exceeded the foul limit and is now ineligible to continue playing.")
 
             else:
                 # If the scoring team input is not valid
-                print("Invalid choice. Please try again.")
+                print("\nInvalid choice. Please try again.")
 
         return home_team_score, away_team_score
 
@@ -255,11 +255,22 @@ class BasketballLeague:
             print("\n" + str(e) + "\n")
             exit()
 
+        while True:
+            try:
+                points_to_win = int(
+                    input("\nEnter the number of points needed to win each match: "))
+                if points_to_win > 0:  # Check if the input is a positive integer
+                    break  # Exit the loop if the input is a valid integer
+                else:
+                    print("\nPlease enter a positive number.")
+            except ValueError:
+                # If the input is not a valid integer, print an error message and continue the loop
+                print("\nInvalid input. Please enter a valid integer number.")
         # Generate the schedule of matches
         schedule = self.schedule_matches(self.teams)
 
         # Play the matches
-        self.play_matches(schedule)
+        self.play_matches(schedule, points_to_win)
 
     def schedule_matches(self, teams):
         # Calculate the number of teams and rounds in the championship
@@ -295,7 +306,7 @@ class BasketballLeague:
         # Return the schedule of matches
         return schedule
 
-    def play_matches(self, schedule):
+    def play_matches(self, schedule, points_to_win):
         # Iterate over each round in the schedule
         for round, round_schedule in enumerate(schedule):
             # Print the round number
@@ -305,7 +316,7 @@ class BasketballLeague:
             for match, (home_team, away_team) in enumerate(round_schedule):
                 # Simulate the match and get the scores
                 home_score, away_score = self.simulate_match(
-                    home_team, away_team)
+                    home_team, away_team, points_to_win)
 
                 # Update the wins for the home and away teams
                 if home_score > away_score:
