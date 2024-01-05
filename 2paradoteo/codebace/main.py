@@ -1,3 +1,4 @@
+from tkinter import S
 from basketball_league import BasketballLeague
 from json_operations import JSONOperations
 import os
@@ -13,14 +14,37 @@ class BasketballApp:
             existing_teams = self.file.handle_json()
             # Initialize the league with the existing teams
             self.league = BasketballLeague(existing_teams)
+            self.datanotfound = False
         else:
             # If the file does not exist, create a new file and initialize an empty league
-            print("Database not found. Creating new data.")
+            print(
+                "\nDatabase not found. Create new data using the Append new data option.")
             self.file = JSONOperations(
                 '2paradoteo\\codebace\\basketball_data.json')
             self.league = BasketballLeague([])
 
+            self.datanotfound = True
+
     def run(self):
+
+        while self.datanotfound:
+            print("\nChoose an option:\n")
+            print("\t1. Append new data")
+            print("\t2. Exit")
+            option = input("\nEnter the option number (1/2): ")
+            if option == "1":
+                # Append new teams to the league
+                self.league.append_new_teams()
+                self.datanotfound = False
+            elif option == "2":
+                # Exit the program
+                choice = input(
+                    "\nAre you sure you want to exit? If yes, type 'y': ")
+                if choice.lower() == "y":
+                    print("\nThanks for using our program!\n")
+                    exit()
+            else:
+                print("\nInvalid option. Please try again.")
         while True:
             print("\nChoose an option:\n")
             print("\t1. Use existing data")
