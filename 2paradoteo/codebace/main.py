@@ -26,7 +26,7 @@ class BasketballApp:
             self.datanotfound = True
 
     def run(self):
-
+        
         while self.datanotfound:
             print("\nChoose an option:\n")
             print("\t1. Append new data")
