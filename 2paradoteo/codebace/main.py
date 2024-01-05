@@ -1,4 +1,3 @@
-from tkinter import S
 from basketball_league import BasketballLeague
 from json_operations import JSONOperations
 import os
