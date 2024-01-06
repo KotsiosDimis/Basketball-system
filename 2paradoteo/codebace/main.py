@@ -2,7 +2,6 @@ from Roster import Roster
 from JSONOperations import JSONOperations
 from Stats import Stats
 from LeagueModification import LeagueModification
-from Schedule import Shedule
 import os
 
 
@@ -28,7 +27,6 @@ class BasketballApp:
             self.datanotfound = True
         self.stats = Stats(self.league.teams)
         self.league_modifier = LeagueModification(self.league.teams)
-        self.shedule = Shedule(self.league.teams)
 
     def run(self):
 

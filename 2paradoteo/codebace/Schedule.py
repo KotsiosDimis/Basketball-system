@@ -2,7 +2,7 @@ from Roster import Roster
 import json
 
 
-class Shedule(Roster):
+class Schedule(Roster):
 
     def __init__(self, teams):
         super().__init__(teams)
