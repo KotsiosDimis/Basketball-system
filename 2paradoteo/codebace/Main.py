@@ -2,6 +2,7 @@ from Roster import Roster
 from JSONOperations import JSONOperations
 from Stats import Stats
 from LeagueModification import LeagueModification
+from Schedule import Schedule
 import os
 
 
@@ -27,6 +28,7 @@ class BasketballApp:
             self.datanotfound = True
         self.stats = Stats(self.league.teams)
         self.league_modifier = LeagueModification(self.league.teams)
+        self.schedule = Schedule(self.league.teams)
 
     def run(self):
 
@@ -61,7 +63,7 @@ class BasketballApp:
 
             if option == "1":
                 # Create a championship using existing data
-                self.shedule.create_championship()
+                self.schedule.create_championship()
                 break
             elif option == "2":
                 # Append new teams to the league
