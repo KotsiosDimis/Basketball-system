@@ -1,7 +1,7 @@
 import json
 import os
-from player import Player
-from team import Team
+from Player import Player
+from Team import Team
 
 
 class JSONOperations:

@@ -1,6 +1,8 @@
-from tkinter import S
-from basketball_league import BasketballLeague
-from json_operations import JSONOperations
+from Roster import Roster
+from JSONOperations import JSONOperations
+from Stats import Stats
+from LeagueModification import LeagueModification
+from Schedule import Shedule
 import os
 
 
@@ -13,7 +15,7 @@ class BasketballApp:
                 '2paradoteo\\codebace\\basketball_data.json')
             existing_teams = self.file.handle_json()
             # Initialize the league with the existing teams
-            self.league = BasketballLeague(existing_teams)
+            self.league = Roster(existing_teams)
             self.datanotfound = False
         else:
             # If the file does not exist, create a new file and initialize an empty league
@@ -21,12 +23,15 @@ class BasketballApp:
                 "\nDatabase not found. Create new data using the Append new data option.")
             self.file = JSONOperations(
                 '2paradoteo\\codebace\\basketball_data.json')
-            self.league = BasketballLeague([])
+            self.league = Roster([])
 
             self.datanotfound = True
+        self.stats = Stats(self.league.teams)
+        self.league_modifier = LeagueModification(self.league.teams)
+        self.shedule = Shedule(self.league.teams)
 
     def run(self):
-        
+
         while self.datanotfound:
             print("\nChoose an option:\n")
             print("\t1. Append new data")
@@ -34,13 +39,13 @@ class BasketballApp:
             option = input("\nEnter the option number (1/2): ")
             if option == "1":
                 # Append new teams to the league
-                self.league.append_new_teams()
+                self.league_modifier.append_new_teams()
                 self.datanotfound = False
             elif option == "2":
                 # Exit the program
                 choice = input(
                     "\nAre you sure you want to exit? If yes, type 'y': ")
-                if choice.lower() == "y":
+                if choice == "y":
                     print("\nThanks for using our program!\n")
                     exit()
             else:
@@ -58,11 +63,11 @@ class BasketballApp:
 
             if option == "1":
                 # Create a championship using existing data
-                self.league.create_championship()
+                self.shedule.create_championship()
                 break
             elif option == "2":
                 # Append new teams to the league
-                self.league.append_new_teams()
+                self.league_modifier.append_new_teams()
             elif option == "3":
                 # Reset all numerical values to 0 in the JSON file
                 self.file.reset_numerical_values()
@@ -80,7 +85,7 @@ class BasketballApp:
                 # Confirm exit or return to the main menu
                 choice = input(
                     "\nAre you sure you want to exit? If yes, type 'y': ")
-                if choice.lower() == "y":
+                if choice == "y":
                     print("\nThanks for using our program!\n")
                     exit()
             else:
@@ -98,13 +103,13 @@ class BasketballApp:
             option = input("\nEnter the option number (1/2/3/4): ")
             if option == "1":  # If option is 1
                 # Exchange players between teams
-                self.league.exchange_players()
+                self.league_modifier.exchange_players()
             elif option == "2":  # If option is 2
                 # Add new players to a team
-                self.league.add_new_players()
+                self.league_modifier.add_new_players()
             elif option == "3":  # If option is 3
                 # Remove players from a team
-                self.league.remove_players()
+                self.league_modifier.remove_players()
             elif option == "4":  # If option is 4
                 flag = False  # Set flag to False to exit the loop
 
@@ -128,16 +133,16 @@ class BasketballApp:
             # Check the option selected by the user
             if option == "1":
                 # Calculate and show team averages
-                self.league.calculate_averages()
+                self.stats.calculate_averages()
             elif option == "2":
                 # Show total team statistics
-                self.league.show_total_team_statistics()
+                self.stats.show_total_team_statistics()
             elif option == "3":
                 # Show MVP of the tournament
-                self.league.show_MVP()
+                self.stats.show_MVP()
             elif option == "4":
                 # Show statistics for a specific player
-                self.league.show_player_statistics()
+                self.stats.show_player_statistics()
             elif option == "5":
                 # Set flag to False to exit the loop
                 flag = False
