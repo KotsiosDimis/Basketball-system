@@ -7,75 +7,68 @@ class LeagueModification(Roster):
     def __init__(self, teams):
         super().__init__(teams)
 
+
     def append_new_teams(self):
+        # General try block to catch any unexpected exceptions
         try:
             # Get the current number of teams
             current_team_count = len(self.teams)
 
-            # Check if the current total number of teams is even or odd
+            # Prompt user based on whether current number of teams is even or odd
             if current_team_count % 2 == 0:
-                # If even, prompt to add an even number of new teams
-                print(f"\nCurrently, there are {
-                      current_team_count} teams, which is even. You need to add an even number of new teams to keep the total even.")
+                print(f"\nCurrently, there are {current_team_count} teams, which is even. You need to add an even number of new teams to keep the total even.")
             else:
-                # If odd, prompt to add an odd number of new teams
-                print(f"\nCurrently, there are {
-                      current_team_count} teams, which is odd. You need to add an odd number of new teams to make the total even.")
+                print(f"\nCurrently, there are {current_team_count} teams, which is odd. You need to add an odd number of new teams to make the total even.")
 
-            # Get the number of new teams to add from user input
-            num_teams_to_add = int(
-                input("\nEnter the number of new teams you want to add: "))
+            # Loop until user enters a valid number of new teams to add to make total even
+            while True:
+                try:
+                    num_teams_to_add = int(input("\nEnter the number of new teams you want to add: "))
 
-            # Validate that the total number of teams will be even after adding the new teams
-            while (current_team_count + num_teams_to_add) % 2 != 0:
-                if num_teams_to_add % 2 == 0:
-                    # If the number of new teams is even, prompt to enter an odd number of new teams
-                    print(
-                        "\nYou've entered an even number of new teams which would result in an odd total. Please enter an odd number of new teams.")
-                else:
-                    # If the number of new teams is odd, prompt to enter an even number of new teams
-                    print(
-                        "\nYou've entered an odd number of new teams which would still result in an odd total. Please enter an even number of new teams.")
-                num_teams_to_add = int(
-                    input("\nEnter a different number of teams to add: "))
-
-            # Get the index of the last existing team
-            last_existing_team_index = len(self.teams)
+                    # Check if the new total will be even
+                    if (current_team_count + num_teams_to_add) % 2 == 0:
+                        break
+                    else:
+                        print("\nThe number of new teams must result in an even total. Please try again.")
+                except ValueError:
+                    print("\nInvalid input. Please enter a valid integer.")
 
             print()
             # Create the new teams
             self.create_teams(num_teams_to_add)
 
-            # Get the number of players per team from user input
+            # Loop to get the number of players per team, must be between 5 and 10
             while True:
                 try:
-                    num_players_per_team = int(
-                        input("\nEnter the number of players per team (between 5 and 10): "))
+                    num_players_per_team = int(input("\nEnter the number of players per team (between 5 and 10): "))
                     if 5 <= num_players_per_team <= 10:
                         break
                     else:
-                        print(
-                            "Invalid range. Please enter a number between 5 and 10.")
+                        print("\nInvalid range. Please enter a number between 5 and 10.")
                 except ValueError:
-                    print("\n\tInvalid input. Please enter a number.")
+                    print("\nInvalid input. Please enter a valid integer.")
 
-            # Validate the number of players per team
-            while num_players_per_team < 5 or num_players_per_team > 10:
-                print(
-                    "\n\tInvalid number of players. Each team must have between 5 and 10 players.\n")
-                num_players_per_team = int(
-                    input("Please enter the number of players per team (between 5 and 10): "))
-
+            print() 
+            
             # Create players for the new teams
-            for i in range(last_existing_team_index, len(self.teams)):
+            for i in range(current_team_count, len(self.teams)):
                 self.create_players_for_team(
                     self.teams[i], num_players_per_team)
 
             # Save the updated teams to a JSON file
             json.dump(self.teams_to_dict(self), open(
                 '2paradoteo\\codebace\\basketball_data.json', 'w'), indent=4)
+
+            # Try to save the updated teams to a JSON file, handle potential file not found error
+            try:
+                with open('2paradoteo\\codebace\\basketball_data.json', 'w') as file:
+                    json.dump(self.teams_to_dict(self), file, indent=4)
+            except FileNotFoundError:
+                print("\nThe file path does not exist. Please check the path and try again.")
+                
         except Exception as e:
-            print(f"An error occurred: {e}")
+            # Catch-all for any other exception that might occur
+            print(f"\nAn error occurred: {e}")
 
     def exchange_players(self):
         try:

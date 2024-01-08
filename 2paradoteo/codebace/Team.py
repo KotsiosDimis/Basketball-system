@@ -1,4 +1,3 @@
-# team.py
 class Team:
     def __init__(self, name, city, logo):
         # Initialize the Team object with the given name, city, and logo

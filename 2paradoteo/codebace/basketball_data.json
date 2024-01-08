@@ -6,6 +6,16 @@
             "logo": "NLogo1",
             "players": [
                 {
+                    "name": "Player1",
+                    "position": "Position1",
+                    "points": 5,
+                    "rebounds": 5,
+                    "assists": 2,
+                    "steals": 1,
+                    "blocks": 0,
+                    "fouls": 3
+                },
+                {
                     "name": "Player2",
                     "position": "Position2",
                     "points": 8,
@@ -44,36 +54,6 @@
                     "steals": 0,
                     "blocks": 1,
                     "fouls": 2
-                },
-                {
-                    "name": "Player1",
-                    "position": "Position1",
-                    "points": 5,
-                    "rebounds": 5,
-                    "assists": 2,
-                    "steals": 1,
-                    "blocks": 0,
-                    "fouls": 3
-                },
-                {
-                    "name": "gerg",
-                    "position": "greg",
-                    "points": 0,
-                    "rebounds": 0,
-                    "assists": 0,
-                    "steals": 0,
-                    "blocks": 0,
-                    "fouls": 0
-                },
-                {
-                    "name": "fwer",
-                    "position": "fwe",
-                    "points": 0,
-                    "rebounds": 0,
-                    "assists": 0,
-                    "steals": 0,
-                    "blocks": 0,
-                    "fouls": 0
                 }
             ],
             "wins": 7

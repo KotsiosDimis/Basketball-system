@@ -1,6 +1,5 @@
 from Team import Team
 from Player import Player
-import json
 
 
 class Roster:
