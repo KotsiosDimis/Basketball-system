@@ -31,7 +31,7 @@ class BasketballApp:
         self.schedule = Schedule(self.league.teams)
 
     def run(self):
-
+        # If the JSON file does not exist, ask the user if they want to append new data
         while self.datanotfound:
             print("\nChoose an option:\n")
             print("\t1. Append new data")
