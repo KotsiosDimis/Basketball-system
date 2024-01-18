@@ -42,11 +42,9 @@ class Roster:
         # Iterate over the range of num_players
         for i in range(num_players):
             # Prompt the user to enter the name for the current player in the given team
-            player_name = input(f"Enter the name for Player {
-                                i+1} in {team.name}: ")
+            player_name = input(f"Enter the name for Player {i+1} in {team.name}: ")
             # Prompt the user to enter the position for the current player in the given team
-            position = input(f"Enter the position for Player {
-                             i+1} in {team.name}: ")
+            position = input(f"Enter the position for Player {i+1} in {team.name}: ")
 
             # Create a new Player object with the entered name, position, and team
             player = Player(player_name, position, team)
@@ -117,7 +115,6 @@ class Roster:
                     if (len(available_teams) == 1):
                         print("\nThere is only one team available. Please choose it.")
                     else:
-                        print(f"\nInvalid choice. Please enter a number between 1 and {
-                            len(available_teams)}.")
+                        print(f"\nInvalid choice. Please enter a number between 1 and {len(available_teams)}.")
             except ValueError:
                 print("\nInvalid input. Please enter a number.")

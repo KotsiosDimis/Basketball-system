@@ -77,12 +77,10 @@ class LeagueModification(Roster):
 
             # Choose the first team
             first_team = self.choose_team()
-            print(f"\nChoose a player from {first_team.name}:")
             first_player = self.choose_player(first_team)
 
             # Choose the second team, excluding the first player's team
             second_team = self.choose_team(selected_team={first_team.name})
-            print(f"\nChoose a player from {second_team.name}:")
             second_player = self.choose_player(second_team)
 
             # Exchange the players between the two teams

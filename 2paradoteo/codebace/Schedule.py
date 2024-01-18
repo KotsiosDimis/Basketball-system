@@ -71,38 +71,32 @@ class Schedule(Roster):
                     # Update scores and Player's Goals for Team 1
                     home_team_score += home_points
                     home_player.points += home_points
-                    print(f"\n\t{home_player.name} scores {home_points} points. Total score: {
-                          home_team_score} - {away_team_score}")
+                    print(f"\n\t{home_player.name} scores {home_points} points. Total score: {home_team_score} - {away_team_score}")
 
                 elif action == '2':
                     # If the action is to add an assist
                     home_player.assists += 1
-                    print(f"\n\tAssist added! {home_player.name} has now {
-                          home_player.assists} assists.")
+                    print(f"\n\tAssist added! {home_player.name} has now {home_player.assists} assists.")
 
                 elif action == '3':
                     # If the action is to add a rebound
                     home_player.rebounds += 1
-                    print(f"\n\tRebound added! {home_player.name} has now {
-                          home_player.rebounds} rebounds.")
+                    print(f"\n\tRebound added! {home_player.name} has now {home_player.rebounds} rebounds.")
 
                 elif action == '4':
                     # If the action is to add a steal
                     home_player.steals += 1
-                    print(f"\n\tSteal added! {home_player.name} has now {
-                          home_player.steals} steals.")
+                    print(f"\n\tSteal added! {home_player.name} has now {home_player.steals} steals.")
 
                 elif action == '5':
                     # If the action is to add a block
                     home_player.blocks += 1
-                    print(f"\n\tBlock added! {home_player.name} has now {
-                          home_player.blocks} blocks.")
+                    print(f"\n\tBlock added! {home_player.name} has now {home_player.blocks} blocks.")
 
                 elif action == '6':
                     # If the action is to add a foul
                     home_player.fouls += 1
-                    print(f"\n\tFoul added! {home_player.name} has now {
-                          home_player.fouls} fouls.")
+                    print(f"\n\tFoul added! {home_player.name} has now {home_player.fouls} fouls.")
 
                     # Check if the player has exceeded the foul limit
                     if home_player.fouls > 1:
@@ -122,38 +116,32 @@ class Schedule(Roster):
                     # Update scores and Player's Goals for Team 2
                     away_team_score += away_points
                     away_player.points += away_points
-                    print(f"\n\t{away_player.name} scores {away_points} points. Total score: {
-                          home_team_score} - {away_team_score}")
+                    print(f"\n\t{away_player.name} scores {away_points} points. Total score: {home_team_score} - {away_team_score}")
 
                 elif action == '2':
                     # If the action is to add an assist
                     away_player.assists += 1
-                    print(f"\n\tAssist added! {away_player.name} has now {
-                          away_player.assists} assists.")
+                    print(f"\n\tAssist added! {away_player.name} has now {away_player.assists} assists.")
 
                 elif action == '3':
                     # If the action is to add a rebound
                     away_player.rebounds += 1
-                    print(f"\n\tRebound added! {away_player.name} has now {
-                          away_player.rebounds} rebounds.")
+                    print(f"\n\tRebound added! {away_player.name} has now {away_player.rebounds} rebounds.")
 
                 elif action == '4':
                     # If the action is to add a steal
                     away_player.steals += 1
-                    print(f"\n\tSteal added! {away_player.name} has now {
-                          away_player.steals} steals.")
+                    print(f"\n\tSteal added! {away_player.name} has now {away_player.steals} steals.")
 
                 elif action == '5':
                     # If the action is to add a block
                     away_player.blocks += 1
-                    print(f"\n\tBlock added! {away_player.name} has now {
-                          away_player.blocks} blocks.")
+                    print(f"\n\tBlock added! {away_player.name} has now {away_player.blocks} blocks.")
 
                 elif action == '6':
                     # If the action is to add a foul
                     away_player.fouls += 1
-                    print(f"\n\tFoul added! {away_player.name} has now {
-                          away_player.fouls} fouls.")
+                    print(f"\n\tFoul added! {away_player.name} has now {away_player.fouls} fouls.")
 
                     # Check if the player has exceeded the foul limit
                     if away_player.fouls > 1:

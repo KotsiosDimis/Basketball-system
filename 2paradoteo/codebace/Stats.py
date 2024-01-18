@@ -82,8 +82,7 @@ class Stats(Roster):
         mvp = max(all_players, key=lambda player: player.points)
 
         # Print the name and points of the MVP
-        print(f"\n{mvp.name} is the MVP of the Tournament with {
-              mvp.points} points.")
+        print(f"\n{mvp.name} is the MVP of the Tournament with {mvp.points} points.")
 
     def show_player_statistics(self):
         # Prompt the user to choose a team
